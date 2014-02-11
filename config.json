@@ -1,0 +1,5 @@
+{
+  "db": "mongodb://localhost/uploader",
+  "url": "http://localhost:4000/",
+  "directory": "/Users/antonio/Downloads"
+}
