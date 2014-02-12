@@ -5,6 +5,7 @@ module.exports = ->
   ImageSchema = new Schema
     name: {type: String}
     sync: {type: Boolean, default: false}
+    message: {type: String}
 
   ImageSchema.statics.isSync = (name, callback) ->
     @find {name:name}, (err, foundImage) ->

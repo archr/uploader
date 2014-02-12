@@ -22,6 +22,7 @@
     "mime": "~1.2.11",
     "async": "~0.2.10",
     "mongoose": "~3.8.7",
-    "superagent": "~0.16.0"
+    "superagent": "~0.16.0",
+    "moment": "~2.5.1"
   }
 }
