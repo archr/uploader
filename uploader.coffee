@@ -41,14 +41,15 @@ uploadImage = (image, done) ->
     Image.update {name: image}, data, upsert:true, done
 
 
-async.waterfall [
-  (done) ->
-    async.each localImages, isSyncImage, done
-  (done) ->
-    total = syncImages.length
-    console.log "sync #{total} images".green
-    async.map syncImages, uploadImage, done
-], (err) ->
-  if err then console.log "Err: #{err}".red
+queue = async.queue uploadImage, 512
+queue.drain = ->
   end = moment()
-  console.log "Final #{end.diff(start, 'minutes')} minutes".green
+  console.log "All images have been sent #{end.diff(start, 'minutes')} minutes".green
+
+
+async.each localImages, isSyncImage, ->
+  total = syncImages.length
+  console.log "sync #{total} images".green
+
+  queue.push syncImages, (err)->
+    console.log "Err image #{err}" if err
