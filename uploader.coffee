@@ -45,6 +45,7 @@ queue = async.queue uploadImage, 512
 queue.drain = ->
   end = moment()
   console.log "All images have been sent #{end.diff(start, 'minutes')} minutes".green
+  process.exit(0)
 
 
 async.each localImages, isSyncImage, ->
